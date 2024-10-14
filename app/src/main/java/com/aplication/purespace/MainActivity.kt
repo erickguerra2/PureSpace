@@ -15,13 +15,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.aplication.purespace.ui.home.view.HomeScreen
 import com.aplication.purespace.ui.selectstaff.view.SelectStaffScreenPreview
 import com.aplication.purespace.ui.theme.PureSpaceTheme
+import com.aplication.purespace.ui.detalles.view.DetallesServicioScreen
+import com.aplication.purespace.ui.pago.view.PagoDetallesScreen
+import com.aplication.purespace.ui.history.view.HistoryScreen
+import com.aplication.purespace.ui.servicer.view.ServicerScreen
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             PureSpaceTheme {
-                SelectStaffScreenPreview()
+                LoginScreen()
             }
         }
     }
