@@ -22,7 +22,7 @@ import com.aplication.purespace.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navigateToSelectStaff: () -> Unit) {
+fun HomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
