@@ -28,7 +28,14 @@ data class StaffMember(
 )
 
 @Composable
-fun SelectStaffScreen(staffList: List<StaffMember>, onStaffSelected: (StaffMember) -> Unit) {
+fun SelectStaffScreen() {
+    // Lista de ejemplo de Staff dentro de la función
+    val staffList = listOf(
+        StaffMember(1, "Carlos Lopez", 4.8f, 125, R.drawable.staff_image_1),
+        StaffMember(2, "Ana Martinez", 4.6f, 100, R.drawable.staff_image_2),
+        StaffMember(3, "Maria Fernandez", 4.9f, 140, R.drawable.staff_image_3)
+    )
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +56,7 @@ fun SelectStaffScreen(staffList: List<StaffMember>, onStaffSelected: (StaffMembe
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(staffList) { staffMember ->
-                StaffCard(staffMember, onStaffSelected)
+                StaffCard(staffMember)
             }
         }
     }
@@ -57,11 +64,10 @@ fun SelectStaffScreen(staffList: List<StaffMember>, onStaffSelected: (StaffMembe
 
 // Composable que muestra la tarjeta de cada profesional
 @Composable
-fun StaffCard(staffMember: StaffMember, onStaffSelected: (StaffMember) -> Unit) {
+fun StaffCard(staffMember: StaffMember) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onStaffSelected(staffMember) }
             .padding(8.dp),
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(4.dp)
@@ -107,15 +113,4 @@ fun StaffCard(staffMember: StaffMember, onStaffSelected: (StaffMember) -> Unit) 
     }
 }
 
-// Vista previa con una lista de ejemplo
-@Preview(showBackground = true)
-@Composable
-fun SelectStaffScreenPreview() {
-    val staffList = listOf(
-        StaffMember(1, "Carlos Lopez", 4.8f, 125, R.drawable.staff_image_1),
-        StaffMember(2, "Ana Martinez", 4.6f, 100, R.drawable.staff_image_2),
-        StaffMember(3, "Maria Fernandez", 4.9f, 140, R.drawable.staff_image_3)
-    )
 
-    SelectStaffScreen(staffList = staffList, onStaffSelected = { /* Acción al seleccionar */ })
-}

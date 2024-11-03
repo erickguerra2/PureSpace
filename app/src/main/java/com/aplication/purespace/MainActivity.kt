@@ -14,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.aplication.purespace.navigation.Navigation
 import com.aplication.purespace.ui.home.view.HomeScreen
-import com.aplication.purespace.ui.selectstaff.view.SelectStaffScreenPreview
 import com.aplication.purespace.ui.theme.PureSpaceTheme
 import com.aplication.purespace.ui.detalles.view.DetallesServicioScreen
 import com.aplication.purespace.ui.pago.view.PagoDetallesScreen

@@ -2,6 +2,7 @@ package com.aplication.purespace.ui.home.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -19,10 +20,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aplication.purespace.R
+import com.aplication.purespace.ui.selectstaff.view.StaffMember
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navigateToSelectStaff: (List<StaffMember>) -> Unit) {
+    val staffList = listOf(
+        StaffMember(1, "Carlos Lopez", 4.8f, 125, R.drawable.staff_image_1),
+        StaffMember(2, "Ana Martinez", 4.6f, 100, R.drawable.staff_image_2),
+        StaffMember(3, "Maria Fernandez", 4.9f, 140, R.drawable.staff_image_3)
+    )
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -108,7 +115,7 @@ fun HomeScreen() {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(recommendedServices) { service ->
-                RecommendedServiceCard(service)
+                RecommendedServiceCard(service, {navigateToSelectStaff(staffList)})
             }
         }
     }
@@ -134,12 +141,13 @@ fun FilterButton(text: String) {
 data class ServiceItem(val title: String, val description: String, val imageRes: Int)
 
 @Composable
-fun RecommendedServiceCard(service: ServiceItem) {
+fun RecommendedServiceCard(service: ServiceItem, navigateToSelectStaff: (List<StaffMember>) -> Unit) {
     Column(
         modifier = Modifier
             .width(160.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(Color.White)
+            .clickable { navigateToSelectStaff(listOf()) }
     ) {
         Image(
             painter = painterResource(id = service.imageRes),
