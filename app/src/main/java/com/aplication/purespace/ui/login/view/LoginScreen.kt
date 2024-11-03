@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.aplication.purespace.ui.theme.PureSpaceTheme
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navigateToHome: () -> Unit) {
     // Variables de estado para almacenar correo y contraseña
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -52,9 +52,10 @@ fun LoginScreen() {
         Button(
             onClick = {
                 // Simulación de un login exitoso
-                if (email == "usuario@ejemplo.com" && password == "123456") {
+                if (email == "eagi578@gmail.com" && password == "123456") {
                     loginSuccess = true
                     loginError = ""
+                    navigateToHome()
                 } else {
                     loginError = "Credenciales incorrectas"
                     loginSuccess = false
@@ -79,9 +80,3 @@ fun LoginScreen() {
     }
 }
 
-// Vista previa en el editor de Android Studio
-@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen()
-}

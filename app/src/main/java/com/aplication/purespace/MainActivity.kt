@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.aplication.purespace.navigation.Navigation
 import com.aplication.purespace.ui.home.view.HomeScreen
 import com.aplication.purespace.ui.selectstaff.view.SelectStaffScreenPreview
 import com.aplication.purespace.ui.theme.PureSpaceTheme
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PureSpaceTheme {
-                LoginScreen()
+                Navigation()
             }
         }
     }

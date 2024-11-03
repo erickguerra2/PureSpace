@@ -22,7 +22,7 @@ import com.aplication.purespace.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navigateToSelectStaff: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,7 +52,8 @@ fun HomeScreen() {
         // Search Field
         TextField(
             value = "",
-            onValueChange = { /* Acción de búsqueda */ },
+            onValueChange = { /* Acción de búsqueda */
+            },
             placeholder = { Text("Search for a service") },
             modifier = Modifier
                 .fillMaxWidth()
