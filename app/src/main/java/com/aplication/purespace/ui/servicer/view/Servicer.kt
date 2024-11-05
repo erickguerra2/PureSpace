@@ -19,11 +19,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aplication.purespace.R
-
+import com.aplication.purespace.ui.selectstaff.view.StaffMember
 
 
 @Composable
-fun ServicerScreen() {
+fun ServicerScreen(navigateToDetails: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -39,25 +39,28 @@ fun ServicerScreen() {
 
         // Lista de solicitudes
         RequestItem(
-            imageRes = R.drawable.staff_image_1, // Imagen subida
+            imageRes = R.drawable.staff_image_1,
             name = "Alisha",
-            description = "2 bedroom, 2 bathroom"
+            description = "2 bedroom, 2 bathroom",
+            navigateToDetails = navigateToDetails // Pasa la función de navegación aquí
         )
         RequestItem(
-            imageRes = R.drawable.staff_image_2, // Imagen subida
+            imageRes = R.drawable.staff_image_2,
             name = "Kendall",
-            description = "1 bedroom, 1 bathroom"
+            description = "1 bedroom, 1 bathroom",
+            navigateToDetails = navigateToDetails // Pasa la función de navegación aquí
         )
         RequestItem(
-            imageRes = R.drawable.staff_image_3, // Imagen subida
+            imageRes = R.drawable.staff_image_3,
             name = "Flora",
-            description = "3 bedroom, 2 bathroom"
+            description = "3 bedroom, 2 bathroom",
+            navigateToDetails = navigateToDetails // Pasa la función de navegación aquí
         )
 
         // Botón "Accept All"
         Spacer(modifier = Modifier.weight(1f))
         Button(
-            onClick = { /* Acción al presionar "Accept All" */ },
+            onClick = { navigateToDetails() },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 16.dp),
@@ -69,7 +72,7 @@ fun ServicerScreen() {
 }
 
 @Composable
-fun RequestItem(imageRes: Int, name: String, description: String) {
+fun RequestItem(imageRes: Int, name: String, description: String, navigateToDetails: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -101,7 +104,7 @@ fun RequestItem(imageRes: Int, name: String, description: String) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Button(
-                onClick = { /* Acción al aceptar */ },
+                onClick = { navigateToDetails() }, // Navegar a la pantalla de pago al aceptar
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF007BFF)),
                 shape = RoundedCornerShape(8.dp)

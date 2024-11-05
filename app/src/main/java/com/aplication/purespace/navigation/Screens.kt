@@ -11,3 +11,15 @@ object Home
 
 @Serializable
 object SelectStaff
+
+@Serializable
+object servicer
+
+@Serializable
+object pagos
+
+@Serializable
+object servicio_details
+
+@Serializable
+object  historial

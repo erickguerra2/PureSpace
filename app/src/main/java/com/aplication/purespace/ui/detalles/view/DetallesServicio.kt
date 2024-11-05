@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.sp
 import java.util.*
 
 @Composable
-fun DetallesServicioScreen() {
+fun DetallesServicioScreen(navigateToPay: () -> Unit) {
     var selectedDate by remember { mutableStateOf("5 Ene 2023") }
     var selectedTime by remember { mutableStateOf("11:00 AM") }
     var additionalDetails by remember { mutableStateOf("") }
@@ -99,7 +99,7 @@ fun DetallesServicioScreen() {
 
 
         Button(
-            onClick = { /* Acción al hacer clic */ },
+            onClick = { navigateToPay() },
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF007BFF)),
             shape = MaterialTheme.shapes.medium

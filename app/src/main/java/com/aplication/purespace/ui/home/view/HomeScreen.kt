@@ -24,7 +24,7 @@ import com.aplication.purespace.ui.selectstaff.view.StaffMember
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navigateToSelectStaff: (List<StaffMember>) -> Unit) {
+fun HomeScreen(navigateToSelectStaff: (List<StaffMember>) -> Unit, navigateToHistory: () -> Unit) {
     val staffList = listOf(
         StaffMember(1, "Carlos Lopez", 4.8f, 125, R.drawable.staff_image_1),
         StaffMember(2, "Ana Martinez", 4.6f, 100, R.drawable.staff_image_2),
@@ -46,9 +46,9 @@ fun HomeScreen(navigateToSelectStaff: (List<StaffMember>) -> Unit) {
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold
             )
-            IconButton(onClick = { /* Acción para configuración */ }) {
+            IconButton(onClick = { navigateToHistory() }) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_ajustes), // Asegúrate de tener un ícono de settings
+                    painter = painterResource(id = R.drawable.ic_ajustes),
                     contentDescription = "Settings"
                 )
             }
@@ -74,7 +74,7 @@ fun HomeScreen(navigateToSelectStaff: (List<StaffMember>) -> Unit) {
             ),
             leadingIcon = {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_busqueda), // Asegúrate de tener un ícono de búsqueda
+                    painter = painterResource(id = R.drawable.ic_busqueda),
                     contentDescription = "Search Icon"
                 )
             }

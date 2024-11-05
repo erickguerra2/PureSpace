@@ -28,7 +28,7 @@ data class StaffMember(
 )
 
 @Composable
-fun SelectStaffScreen() {
+fun SelectStaffScreen(navigateToServicer: () -> Unit) {
     // Lista de ejemplo de Staff dentro de la función
     val staffList = listOf(
         StaffMember(1, "Carlos Lopez", 4.8f, 125, R.drawable.staff_image_1),
@@ -56,19 +56,19 @@ fun SelectStaffScreen() {
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(staffList) { staffMember ->
-                StaffCard(staffMember)
+                StaffCard(staffMember, {navigateToServicer()})
             }
         }
     }
 }
 
-// Composable que muestra la tarjeta de cada profesional
 @Composable
-fun StaffCard(staffMember: StaffMember) {
+fun StaffCard(staffMember: StaffMember, navigateToServicer: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable { navigateToServicer() },
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
@@ -112,5 +112,4 @@ fun StaffCard(staffMember: StaffMember) {
         }
     }
 }
-
 
