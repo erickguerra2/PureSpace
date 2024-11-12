@@ -23,3 +23,6 @@ object servicio_details
 
 @Serializable
 object  historial
+
+@Serializable
+object Register

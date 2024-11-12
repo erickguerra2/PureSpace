@@ -9,10 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.aplication.purespace.ui.register.view.RegisterScreen
 import com.aplication.purespace.ui.theme.PureSpaceTheme
 
 @Composable
-fun LoginScreen(navigateToHome: () -> Unit) {
+fun LoginScreen(navigateToHome: () -> Unit, navigateToRegister: () -> Unit) {
     // Variables de estado para almacenar correo y contraseña
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -46,9 +47,17 @@ fun LoginScreen(navigateToHome: () -> Unit) {
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
         )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = {
+                navigateToRegister()
+            },
+            modifier = Modifier.fillMaxWidth()
+        ){
+            Text(text = "Registrarse")
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
-
         Button(
             onClick = {
                 // Simulación de un login exitoso
