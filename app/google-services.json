@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463666077228",
+    "project_id": "purespace-8dc7b",
+    "storage_bucket": "purespace-8dc7b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463666077228:android:5b56891fab57e15a7b7b89",
+        "android_client_info": {
+          "package_name": "com.aplication.purespace"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3V6EgGH-5LcQO7kfXVYly88vLLB_m2qU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
