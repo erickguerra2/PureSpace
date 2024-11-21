@@ -23,3 +23,7 @@ val DarkPrimary = Green700
 val DarkPrimaryVariant = Green700
 val DarkSecondary = Teal200
 val DarkBackground = Color.Black
+
+val Cremita = Color(0xFFEBDEB8)
+val White = Color(0xFFFFFFFF)
+val skyBlue = Color(0xFF87CEEB)

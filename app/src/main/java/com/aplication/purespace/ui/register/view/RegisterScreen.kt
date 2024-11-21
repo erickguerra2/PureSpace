@@ -1,5 +1,7 @@
 package com.aplication.purespace.ui.register.view
 
+import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,40 +20,29 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.aplication.purespace.ui.theme.White
+import com.aplication.purespace.ui.theme.skyBlue
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
-fun RegisterScreen(navigateToHome: () -> Unit) {
-    var name by remember { mutableStateOf("") }
-    var lastName by remember { mutableStateOf("") }
+fun RegisterScreen(navigateToHome: () -> Unit, auth: FirebaseAuth) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(1.dp)
+            .background(Brush.verticalGradient(listOf(skyBlue, White))),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(text = "Registro", style = MaterialTheme.typography.headlineLarge)
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        TextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Nombre") },
-            modifier = Modifier.fillMaxWidth()
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        TextField(
-            value = lastName,
-            onValueChange = { lastName = it },
-            label = { Text("Apellido") },
-            modifier = Modifier.fillMaxWidth()
-        )
         Spacer(modifier = Modifier.height(16.dp))
         TextField(
             value = email,
@@ -70,11 +61,19 @@ fun RegisterScreen(navigateToHome: () -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
-                // Simulación de un registro exitoso
-                navigateToHome()
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener{ it ->
+                    if (it.isSuccessful){
+                        Log.i("Register", "Registration successful")
+                        navigateToHome()
+                    }
+                    else{
+                        // Manejar el error
+                        Log.i("Register", "Registration failed")
+                    }
+                }
             },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Registro")}
+            Text(text = "Registrarse")}
         }
 }

@@ -2,6 +2,7 @@ package com.aplication.purespace.navigation
 
 import LoginScreen
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -13,44 +14,47 @@ import com.aplication.purespace.ui.pago.view.PagoDetallesScreen
 import com.aplication.purespace.ui.detalles.view.DetallesServicioScreen
 import com.aplication.purespace.ui.history.view.HistoryScreen
 import com.aplication.purespace.ui.register.view.RegisterScreen
+import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun Navigation(){
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Login){
-        composable<Login>{
-            LoginScreen(navigateToHome = { navController.navigate(Home)},
-                navigateToRegister = { navController.navigate(Register)})
+fun Navigation(navHostController: NavHostController,auth: FirebaseAuth){
+
+    NavHost(navController = navHostController, startDestination = "Login"){
+        composable("Login"){
+            LoginScreen(navigateToHome = { navHostController.navigate("Home")},
+                navigateToRegister = { navHostController.navigate("Register")},
+                auth)
         }
-        composable<Register>{
+        composable("Register"){
             RegisterScreen(
-                navigateToHome = { navController.navigate(Home) },)
+                navigateToHome = { navHostController.navigate("Home") },
+                auth)
         }
-        composable<Home> {
+        composable("Home") {
             HomeScreen(
-                navigateToSelectStaff = { navController.navigate(SelectStaff) },
-                navigateToHistory = { navController.navigate(historial) }
+                navigateToSelectStaff = { navHostController.navigate("SelectStaff") },
+                navigateToHistory = { navHostController.navigate("historial") }
             )
         }
-        composable<SelectStaff>{
+        composable("SelectStaff"){
             SelectStaffScreen{
-                navController.navigate(servicer)
+                navHostController.navigate("servicer")
             }
         }
-        composable<servicer>{
+        composable("servicer"){
             ServicerScreen{
-                navController.navigate(servicio_details)
+                navHostController.navigate("servicio_details")
             }
         }
-        composable<pagos>{
+        composable("pagos"){
             PagoDetallesScreen()
 
         }
-        composable<servicio_details>{
+        composable("servicio_details"){
             DetallesServicioScreen{
-                navController.navigate(pagos)
+                navHostController.navigate("pagos")
             }
-        composable<historial>{
+        composable("historial"){
             HistoryScreen()
         }
 
