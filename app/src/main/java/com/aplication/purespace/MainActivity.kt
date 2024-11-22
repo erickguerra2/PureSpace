@@ -24,6 +24,8 @@ import com.aplication.purespace.ui.history.view.HistoryScreen
 import com.aplication.purespace.ui.servicer.view.ServicerScreen
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 

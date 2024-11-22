@@ -15,11 +15,12 @@ import com.aplication.purespace.ui.detalles.view.DetallesServicioScreen
 import com.aplication.purespace.ui.history.view.HistoryScreen
 import com.aplication.purespace.ui.register.view.RegisterScreen
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 @Composable
 fun Navigation(navHostController: NavHostController,auth: FirebaseAuth){
 
-    NavHost(navController = navHostController, startDestination = "Login"){
+    NavHost(navController = navHostController, startDestination = "Home"){
         composable("Login"){
             LoginScreen(navigateToHome = { navHostController.navigate("Home")},
                 navigateToRegister = { navHostController.navigate("Register")},
@@ -33,7 +34,7 @@ fun Navigation(navHostController: NavHostController,auth: FirebaseAuth){
         composable("Home") {
             HomeScreen(
                 navigateToSelectStaff = { navHostController.navigate("SelectStaff") },
-                navigateToHistory = { navHostController.navigate("historial") }
+                navigateToHistory = { navHostController.navigate("historial") },
             )
         }
         composable("SelectStaff"){
