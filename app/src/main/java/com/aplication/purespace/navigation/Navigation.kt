@@ -39,7 +39,7 @@ fun Navigation(navHostController: NavHostController,auth: FirebaseAuth){
         }
         composable("SelectStaff"){
             SelectStaffScreen{
-                navHostController.navigate("servicer")
+                navHostController.navigate("servicio_details")
             }
         }
         composable("servicer"){
