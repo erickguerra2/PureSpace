@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun PagoDetallesScreen() {
+fun PagoDetallesScreen(navigateToHome: () -> Unit) {
     var cardNumber by remember { mutableStateOf("") }
     var expirationDate by remember { mutableStateOf("") }
     var cvv by remember { mutableStateOf("") }
@@ -180,7 +180,7 @@ fun PagoDetallesScreen() {
 
         // Botón Confirmar y reservar
         Button(
-            onClick = { /* Acción de confirmar */ },
+            onClick = { navigateToHome() },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),

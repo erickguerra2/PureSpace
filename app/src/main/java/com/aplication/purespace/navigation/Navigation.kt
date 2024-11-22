@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 @Composable
 fun Navigation(navHostController: NavHostController,auth: FirebaseAuth){
 
-    NavHost(navController = navHostController, startDestination = "Home"){
+    NavHost(navController = navHostController, startDestination = "Login"){
         composable("Login"){
             LoginScreen(navigateToHome = { navHostController.navigate("Home")},
                 navigateToRegister = { navHostController.navigate("Register")},
@@ -48,7 +48,9 @@ fun Navigation(navHostController: NavHostController,auth: FirebaseAuth){
             }
         }
         composable("pagos"){
-            PagoDetallesScreen()
+            PagoDetallesScreen(
+                navigateToHome = { navHostController.navigate("Home") }
+            )
 
         }
         composable("servicio_details"){
