@@ -36,6 +36,7 @@ import com.aplication.purespace.ui.home.viewmodel.HomeViewModel
 fun HomeScreen(navigateToSelectStaff: (List<StaffMember>) -> Unit, navigateToHistory: () -> Unit, viewModel: HomeViewModel = HomeViewModel()) {
 
     val services = viewModel.services.collectAsState()
+
     Log.d("HomeScreen", "Services: ${services.value}")
 
     val staffList = listOf(
@@ -101,7 +102,13 @@ fun HomeScreen(navigateToSelectStaff: (List<StaffMember>) -> Unit, navigateToHis
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold
         )
-
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(modifier = Modifier.padding(start = 16.dp)
+            .clickable { navigateToSelectStaff(staffList) },
+            text = "Siguiente paso",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold
+        )
         Spacer(modifier = Modifier.height(8.dp))
 
         // Lista de servicios recomendados
@@ -114,6 +121,7 @@ fun HomeScreen(navigateToSelectStaff: (List<StaffMember>) -> Unit, navigateToHis
                 RecommendedServiceCard(it, {navigateToSelectStaff(staffList)})
             }
         }
+
     }
 }
 
@@ -136,8 +144,6 @@ fun FilterButton(text: String) {
 
 @Composable
 fun RecommendedServiceCard(service: Service, navigateToSelectStaff: (List<StaffMember>) -> Unit) {
-    val context = LocalContext.current
-    val imageResId = context.resources.getIdentifier(service.imageRes, "drawable", context.packageName)
     Column(
         modifier = Modifier
             .width(160.dp)
@@ -145,38 +151,27 @@ fun RecommendedServiceCard(service: Service, navigateToSelectStaff: (List<StaffM
             .background(Color.White)
             .clickable { navigateToSelectStaff(listOf()) }
     ) {
-        if (imageResId != 0) {
-            // Cargar la imagen usando painterResource
-            Image(
-                painter = painterResource(id = imageResId),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp)
-            )
-        } else {
-            // Usar un recurso predeterminado si la imagen no se encuentra
-            Image(
-                painter = painterResource(id = R.drawable.servicio_limpieza), // Cambiar por tu recurso predeterminado
-                contentDescription = "Placeholder",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp)
-            )
+        AsyncImage(
+            model = service.imageRes.orEmpty(),
+            placeholder = painterResource(R.drawable.servicio_limpieza), // Reemplaza con un recurso válido
+            error = painterResource(R.drawable.servicio_planchado), // Imagen de error
+            contentDescription = "services",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(120.dp)
+        )
+
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = service.title,
+            text = service.title.orEmpty(),
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(horizontal = 8.dp)
         )
         Text(
-            text = service.description,
+            text = service.description.orEmpty(),
             style = MaterialTheme.typography.bodySmall,
             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
         )
     }
-}
 }

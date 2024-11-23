@@ -21,31 +21,30 @@ class HomeViewModel : ViewModel() {
     val services: StateFlow<List<Service>> = _services
 
     init {
-        _services.value = listOf(
-            Service("1", "Limpieza del hogar", "Realizamos una limpieza completa del hogar", "https://www.camarounds.com/wp-content/uploads/2020/08/Servicios-de-limpieza-a-domicilio-profesional.jpg"),
-            Service("2", "Servicio de planchado", "Realizamos planchado de ropa", "https://cdn1.totalcommerce.cloud/casalimpia/product-image/es/servicio-premium-de-planchado-a-domicilio-2.webp"),
-            Service("3", "Limpieza de ventanas", "Realizamos limpieza de ventanas", "https://marube.es/modules/dbblog/views/img/post/84-limpieza-de-ventanas-en-verano-trucos-para-un-brillo-impecable-big.jpg")
-        )
+        getServices()
     }
 
 
     private fun getServices() {
         viewModelScope.launch {
-            val result: List<Service> = withContext(Dispatchers.IO) {
+            val results: List<Service> = withContext(Dispatchers.IO) {
                 getAllServices()
             }
-            _services.value = result
+            _services.value = results
+
         }
     }
 
+
     private suspend fun getAllServices(): List<Service> {
         return try {
-            val querySnapshot = db.collection("services").get().await()
-            Log.d("HomeViewModel", "Fetched ${querySnapshot.documents.size} documents")
-            querySnapshot.documents.mapNotNull { snapshot ->
-                Log.d("HomeViewModel", "Document Data: ${snapshot.data}")
-                snapshot.toObject(Service::class.java)
-            }
+            db.collection("services")
+                .get()
+                .await()
+                .documents
+                .mapNotNull { snapShot ->
+                    snapShot.toObject(Service::class.java)
+                }
         } catch (e: Exception) {
             Log.e("HomeViewModel", "Error fetching services", e)
             emptyList()
